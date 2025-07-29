@@ -1,2 +1,34 @@
-# ai_agent_trading
-This project is an AI-powered automated trading agent developed to operate futures contracts of crypto assets such as BTC, ETH, SOL, and others.
+🧠 AI Agent Trading
+This project is an AI-powered automated trading agent developed to operate futures contracts of crypto assets such as BTC, ETH, SOL, and others. It performs technical analysis and executes smart long and short orders.
+
+🎯 Objectives
+📈 Automate leveraged operations in futures markets (long/short)
+
+🧠 Use technical analysis and AI logic for precise decision-making
+
+🔐 Apply strict risk management (stop-loss, take-profit, leverage control)
+
+🔔 Integrate automations and real-time notifications (via n8n, Telegram, etc.)
+
+⚙️ Architecture & Technologies
+Component	Technology
+Trading Logic	Python, Pandas, TA-Lib, NumPy
+Backtesting Engine	Backtrader or vectorbt
+Market Data	Binance Futures API (via ccxt)
+Backend / API	FastAPI
+User Interface	--Dashboard-- Vue.js
+Notifications	n8n + Telegram / Discord
+Logs & Storage	PostgreSQL / Google Sheets
+
+🔄 General Workflow
+Collects historical and real-time data (OHLCV)
+
+Applies technical strategies based on indicators (RSI, MACD, MA, etc.)
+
+Detects entry and exit points using deterministic logic or AI
+
+Executes trades with risk control
+
+Logs all transactions for analysis and auditing
+
+Sends automated reports and alerts via n8n
