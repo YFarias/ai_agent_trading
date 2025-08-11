@@ -19,5 +19,16 @@ graphql_app = GraphQLRouter(schema)
 # FastAPI
 app = FastAPI()
 
-# GraphQL
+# GraphQL - Admin GUI
 app.include_router(graphql_app, prefix="/graphql")
+
+
+#REST API - Service API
+@app.get("/")
+def read_root():
+    return {"message": "Hello from FastAPI 👋"}
+
+
+
+
+

@@ -14,7 +14,7 @@ response = client.chat.completions.create(
             "role": "system",
             "content": (
                 "Você é um trader profissional. "
-                "Sua função é analisar os indicadores fornecidos e decidir apenas uma palavra: BUY, SELL ou HOLD. "
+                "Sua função é analisar os indicadores fornecidos e ajudar o usuario a tomar uma decisao, seja ela de compra, venda ou hold, trade, spot, short, long, etc. "
                 "Não explique. Apenas responda com uma dessas palavras, em letras maiúsculas."
             )
         }
