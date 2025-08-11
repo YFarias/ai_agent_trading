@@ -32,3 +32,11 @@ Executes trades with risk control
 Logs all transactions for analysis and auditing
 
 Sends automated reports and alerts via n8n
+
+
+
+python version = 3.12.3
+cd backend 
+python -m venv .venv
+pip install requirements.txt
+python run.py

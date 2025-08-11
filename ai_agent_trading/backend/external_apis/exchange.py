@@ -1,7 +1,6 @@
 #BinanceAPI
-
-
 import os
+import pandas as pd
 from binance.client import Client
 from dotenv import load_dotenv
 
@@ -21,42 +20,26 @@ binance_client.FUTURES_URL = 'https://fapi.binance.com'
 # Funções auxiliares
 # ========================
 
-def get_price(symbol: str) -> float:
-    """Retorna o último preço de um ativo futuro (ex: BTCUSDT)."""
-    ticker = binance_client.futures_symbol_ticker(symbol=symbol)
-    return float(ticker["price"])
+def get_market_asset_data(symbol: str, interval: str = '1d', limit: int = 500) -> pd.DataFrame:
+    """
+    Obtém dados de mercado (candles) de um ativo futuro da Binance.
+    
+    :param symbol: Par de trading, ex: 'BTCUSDT'
+    :param interval: Intervalo de tempo (ex: '4h', '1d', '1w')
+    :param limit: Quantidade de candles a retornar (máx: 1500)
+    :return: DataFrame com colunas: time, open, high, low, close, volume
+    """
+    klines = binance_client.futures_klines(symbol=symbol, interval=interval, limit=limit)
 
+    df = pd.DataFrame(klines, columns=[
+        "time", "open", "high", "low", "close", "volume",
+        "close_time", "quote_asset_volume", "trades",
+        "taker_base_volume", "taker_quote_volume", "ignore"
+    ])
 
-def get_balance(asset: str = "USDT") -> float:
-    """Retorna o saldo disponível de um ativo específico na conta de futuros."""
-    balances = binance_client.futures_account_balance()
-    for item in balances:
-        if item["asset"] == asset:
-            return float(item["balance"])
-    return 0.0
+    # Convertendo tipos
+    df["time"] = pd.to_datetime(df["time"], unit="ms")
+    df.set_index("time", inplace=True)
+    df[["open", "high", "low", "close", "volume"]] = df[["open", "high", "low", "close", "volume"]].astype(float)
 
-
-def get_position_info(symbol: str) -> dict:
-    """Retorna informações da posição aberta de um símbolo (ex: tamanho, entrada, PnL)."""
-    positions = binance_client.futures_position_information(symbol=symbol)
-    return positions[0] if positions else {}
-
-
-def get_exchange_info() -> dict:
-    """Retorna informações sobre todos os ativos de Futuros disponíveis."""
-    return binance_client.futures_exchange_info()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    return df[["open", "high", "low", "close", "volume"]]
