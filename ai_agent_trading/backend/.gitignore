@@ -1,2 +1,5 @@
 .env
-.indicators.py
+.super_bot.py
+.trend_bot.py
+.data_test.json
+.data_test.json

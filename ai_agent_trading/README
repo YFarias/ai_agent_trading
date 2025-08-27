@@ -38,5 +38,6 @@ Sends automated reports and alerts via n8n
 python version = 3.12.3
 cd backend 
 python -m venv .venv
-pip install requirements.txt
+pip install -r .\requirements.txt
+pip freeze > .\requirements.txt  
 python run.py

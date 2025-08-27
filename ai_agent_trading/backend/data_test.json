@@ -1,4 +1,7 @@
-[
+{
+  "time_frame": "4h",
+  "assets": "BTCUSDT",
+  "events": [
     {
       "open_time": 1752473967339,
       "open": "111336.10",
@@ -1399,5 +1402,6 @@
       "taker_buy_quote_volume": "18784415.618",
       "ignore": "0"
     }
-]
+ ]
+} 
   
